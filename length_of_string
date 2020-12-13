@@ -1,0 +1,11 @@
+#include <stdio.h>
+int main()
+{
+ char str[100],i;
+ printf("Enter the string : ");
+ scanf("%s", str);
+ for(i = 0; str[i] != '\0' ; ++i);  // != operator checks whether character i = null character is equal or not if it is not equal then the condition becomes false,and checks another character until null character is equal //
+ printf("Length of Str is %d\n", i);
+}
+
+
