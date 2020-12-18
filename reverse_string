@@ -1,0 +1,10 @@
+#include<stdio.h>
+int main(){
+  char* name = " dhanush ";
+  int i;
+  for(i=7; i>0; i--){
+    printf("%c", name[i] );
+  }
+  printf("\n");
+  
+}
