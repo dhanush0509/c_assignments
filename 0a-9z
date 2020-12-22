@@ -1,0 +1,14 @@
+#include<stdio.h>
+int main()
+{
+char m;
+int i;
+for( i = 0; i < 10; ++i)
+{
+for( m = 'a'; m <= 'z'; ++m)
+{
+printf(" %d%c  ",i,m);
+}
+printf("\n");
+}
+}
