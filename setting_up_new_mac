@@ -1,0 +1,47 @@
+1.first download homebrew
+you can find this link in homebrew website "/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" "
+copy that and paste in terminal then home brew will will be installed
+2.the we have to install vim editor
+for that type " brew install vi " in terminal 
+then vi will be installed
+3.then we have to install comand line tool  
+4.we have to install git using brew 
+type " brew install git" in terminal
+then git will be installed
+5.then we have have to configure our git account
+       first we have to generate new ssh for that follow these steps:
+      1.Open Terminal
+      2.Paste the text below, substituting in your GitHub email address
+        ssh-keygen -t ed25519 -C "your_email@example.com"
+      3.When you're prompted to "Enter a file in which to save the key," press Enter. This accepts the default file location
+      4.At the prompt, type a secure passphrase.
+        > Enter passphrase (empty for no passphrase): [Type a passphrase]
+        > Enter same passphrase again: [Type passphrase again]
+     after that add your ssh key to your ssh agent by the following steps
+     1.Start the ssh-agent in the background.
+       $ eval "$(ssh-agent -s)"
+       > Agent pid 59566
+     2.First, check to see if your ~/.ssh/config file exists in the default location.
+       $ open ~/.ssh/config
+       > The file /Users/you/.ssh/config does not exist. 
+       If the file doesn't exist, create the file.
+       $ touch ~/.ssh/config
+     3.Open your ~/.ssh/config file, then modify the file, replacing ~/.ssh/id_ed25519 if you are not using the default location and name for your id_ed25519 key.
+            Host *
+            AddKeysToAgent yes
+            UseKeychain yes
+            IdentityFile ~/.ssh/id_ed25519
+     now Add the SSH key to your GitHub account by following steps:
+     1.Copy the SSH public key to your clipboard.
+       $ pbcopy < ~/.ssh/id_ed25519.pub
+       # Copies the contents of the id_ed25519.pub file to your clipboard
+     2.In the upper-right corner of any page, click your profile photo, then click Settings.
+     3.In the user settings sidebar, click SSH and GPG keys
+     4.Click New SSH key or Add SSH key.
+     5.In the "Title" field, add a descriptive label for the new key. For example, if you're using a personal Mac, you might call this key "Personal MacBook Air".
+     6.Paste your key into the "Key" field.
+     7.Click Add SSH key.
+     8.If prompted, confirm your GitHub password.
+     hence github is configured to your mac.
+
+
