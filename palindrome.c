@@ -1,25 +1,27 @@
-#include<stdio.h>
+#include <stdio.h>
 int main()
 {
-  char name[10] = " Madam ";
-  int i,a;
-  for( a = 0 ; 6 > a ; ++a)
-  {
-    printf("%c",name[a]);
-  }
-  printf("\n");
-  for(i = 6 ; i > 0 ; --i)
-  {
-    printf("%c",name[i]);
-  }
-  printf("\n");
-  if (name[a] == name[i])
-  {
-    printf(" Madam is a palindrome\n ");
-  }
-  else
-  {
-    printf(" Madam is not a palindrome\n ");
-  }
+ char str[100],i;
+ int a,b;
+ b=0;
+ printf("Enter the string : ");
+ scanf("%s", str);
+ for(i = 0; str[i] != '\0' ; ++i); 
+ printf("Length of Str is %d\n", i);
+for(a = 0; a < i; a++)
+{
+if ( str[a] != str[i-a-1])
+b=1;
+break;
 }
+if (b==0)
+{
+printf(" is a palindrome ");
+}
+else
+{
+printf(" not a palindrome ");
+}
+}
+
 
