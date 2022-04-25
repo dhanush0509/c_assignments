@@ -1,0 +1,64 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct list
+{
+  int data;
+  struct list* next;
+}node;
+node  *head,*tail; // creating a head and tail of a list //
+
+void insert(int n)//inserting a node // 
+{
+  node *start;
+  start=(node*)malloc(sizeof(node));
+  start->data=n;
+  if(head==NULL)
+  {
+    head=start;
+    tail=start;
+    start->next=head;
+  }
+  else
+  {
+    tail->next=start;
+    tail=start;
+    tail->next=head;// last node points to the first node//
+  }
+}
+void delete(int n)// deleting a node
+{
+  node *start,*temp;
+  start=head;
+  while(start->next!=head)
+  {
+    temp=start;
+    start=start->next;
+}
+temp->next=start->next;
+free(start);
+}
+
+  void print_list()// printing the list
+  {
+    node *start;
+    start = head;
+    while(start->next!=head)
+    {
+      printf(" %d ",start->data);
+      start=start->next;
+    }
+    printf("\n");
+  }
+  int main()
+  {
+    insert(8);
+    insert(2);
+    insert(3);
+    insert(1);
+    insert(4);
+    insert(6);
+    insert(9);
+    print_list();
+    delete(6);
+    print_list();
+  }
