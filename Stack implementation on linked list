@@ -1,0 +1,75 @@
+#include<stdio.h>  
+#include<stdlib.h>  
+struct node  
+{  
+    struct node *next;  
+    int data;  
+};
+struct node *head;  //head of the list
+void push (int n)  //pushing elements into array
+{  
+    struct node *start = (struct node*)malloc(sizeof(struct node));   
+    if(start == NULL)  
+    {  
+        printf("not able to push the element");   
+    }  
+    else   
+    {  
+        if(head==NULL)  
+        {         
+            start->data = n;  
+            start->next = NULL;  
+            head=start;  
+        }   
+        else   
+        {  
+            start->data = n;  
+            start->next = head;  
+            head=start;  
+               
+        }  
+    }  
+}  
+void pop()  // popping elements from the list
+{  
+    struct node *start;  
+        start = head;  
+        head = head->next;  
+        free(start);  // removes the top element
+}  
+void printlist()  // printint the list
+{  
+    int i;  
+    struct node *start;  
+    start=head;  
+    if(start == NULL)  
+    {  
+        printf("stack is empty\n");  
+    }  
+    else  
+    {  
+        while(start!=NULL)  
+        {  
+            printf("%d\n",start->data);  
+            start = start->next;  
+        }  
+    }  
+    
+}
+int main()
+{
+    push(5);
+    push(3);
+    push(9);
+    push(2);
+    push(1);
+    push(8);
+    printf("elements in stack\n");// prints the list after pushing the elements
+    printlist();
+    pop();
+    pop();
+    pop();
+    printf("elements in stack after popping\n");//prints the list after popping the elements
+    printlist();
+    return 0;
+}
