@@ -1,0 +1,53 @@
+#include<stdio.h>   
+#include<stdlib.h>  
+int queue[5],front=0,rear=0,i,x=5;//declaring static variables
+void insert()  // (enqueue)inserting elements
+{  
+    if(rear==x)
+    printf("queue is full\n");
+    else
+    {
+    printf("enter the elements \n"); // first element if front and last element is rear
+    scanf("%d",&queue[rear++]);// as elements inserted rear increases
+    }
+}  
+void delete() //(dequeue )deleting an element
+{
+    if(front==rear)// when rear and front are equal it means that queue  is emepty
+    {
+    printf(" queue is empty\n");
+    }
+    else
+    {
+    printf("deleted element is %d\n",queue[front++]);// in queue first element is deleted and front increses 
+    x++;
+    }
+}
+void printarray()
+{
+printf("queue elements are:\n");
+    if(front==rear)
+    printf("queue is empty\n");
+     else
+    {
+    for(i=front; i<rear; i++)//printing the elements
+  {
+    printf("%d",queue[i]);
+    printf("\n");
+    }
+  }
+}
+ int main()
+ {
+     insert();
+     insert();
+     insert();
+     insert();
+     insert();
+     printarray();
+     delete();
+     delete();
+     printf("elements after deleting\n");
+     printarray();
+     return 0;
+ }
