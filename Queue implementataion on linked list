@@ -1,0 +1,85 @@
+#include<stdio.h>   
+#include<stdlib.h>  
+struct node   
+{  
+    int data;   
+    struct node *next;  
+};  
+struct node *front;  
+struct node *rear;   
+void insert(int n)  // inserting the values 
+{  
+    struct node *start;  
+    int item;  
+    start = (struct node *) malloc (sizeof(struct node));  
+    if(start == NULL)  
+    {  
+        printf("error\n");  
+        return;  
+    }  
+    else  
+    {   
+        start-> data = n;  
+        if(front == NULL)  // if front and rear are equal then the queue is emepty
+        {  
+            front = start;  
+            rear = start;   
+            front -> next = NULL;  
+            rear -> next = NULL;  
+        }  
+        else   
+        {  
+            rear -> next = start;  // when we add values to queue only to rear 
+            rear = start;  
+            rear->next = NULL;  
+        }  
+    }  
+}
+void delete()  
+{  
+    struct node *start;  
+    if(front == NULL)  // if front and rear are equal then the queue is emepty
+    {  
+        printf("error\n");  
+        return;  
+    }  
+    else   
+    {  
+        start = front;  // as in queue first value will be deleted so front value will be deleted
+        front = front -> next;  
+        free(start);  
+    }  
+}  
+void printlist()  
+{  
+    struct node *start;  
+    start = front;      
+    if(front == NULL)  
+    {  
+        printf(" queue is emepty\n");  
+    }  
+    else  
+    {  
+        while(start != NULL)   // printing the values in  queue
+        {  
+            printf("%d\n",start -> data);  
+            start = start -> next;  
+        }  
+    }  
+}  
+int main()
+{
+    insert(4);
+    insert(1);
+    insert(8);
+    insert(3);
+    insert(5);
+    insert(9);
+    printf(" printing the values in queue \n");
+    printlist();
+    delete();
+    delete();
+    printf(" printing the value in queue after deletion \n");
+    printlist();
+    return 0;
+}
