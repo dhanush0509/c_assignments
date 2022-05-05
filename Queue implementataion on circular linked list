@@ -1,0 +1,86 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+        int data;
+        struct node *next;
+};
+struct node *rear;// rear as head of list
+
+void insert(int n)
+{
+        struct node *start;
+        start=(struct node *)malloc(sizeof(struct node));
+        start->data=n;
+        if(start==NULL)
+        {
+                printf(" emepty\n");
+                return;
+        }
+
+        if( rear==NULL ) //while adding 1st element 
+        {
+                rear=start;
+                start->next=rear;
+        }
+        else
+        {
+                start->next=rear->next;// inserting elements 
+                rear->next=start;
+                rear=start;
+        }
+}
+void delete()
+{
+        struct node *start;
+        if( rear==NULL )
+        {
+                printf("error\n");
+                return ;
+        }
+        if(rear->next==rear)  //if queue have only one element
+        {
+                start=rear;
+                rear=NULL;
+        }
+        else
+        {
+                start=rear->next;// deleting the first element
+                rear->next=rear->next->next;
+        }
+        free(start);// deleting the node from queue
+}
+void printlist()
+{
+        struct node *start;
+        if(rear==NULL)
+        {
+                printf("queue is empty\n");
+                return;
+        }
+        start=rear->next;
+        do
+        {
+                printf("%d ",start->data);// printing the values in queue using do while loop
+                start=start->next;
+        }while(start!=rear->next);
+        printf("\n");
+}
+
+int main()
+{
+      insert(4);
+      insert(6);
+      insert(1);
+      insert(8);
+      insert(3);
+      insert(6);
+      printf("values in queue\n");
+      printlist();
+      delete();
+      delete();
+      printf("values in queue after deleting\n");
+      printlist();
+      
+      return 0;
+}
