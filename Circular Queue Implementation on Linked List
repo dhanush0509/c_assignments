@@ -1,0 +1,72 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+	int data;
+	struct node* next;
+};
+struct node *front = NULL,*rear = NULL;//creating front and rear
+void enqueue(int n) //insert elements in queue
+{
+	struct node* start;
+	start = (struct node*)malloc(sizeof(struct node));
+	start->data = n;
+	start->next = NULL;
+	if((rear==NULL)&&(front==NULL))//when both are equal to NULL 
+	{
+		front = rear = start;//front and rear = 1st node
+		rear->next = front;
+	}
+	else
+	{
+		rear->next = start;
+		rear = start;
+		start->next = front;
+	}
+} 
+void dequeue() // delete an element from queue
+{
+	struct node* start;
+	start = front;
+	if((front==NULL)&&(rear==NULL))
+		printf("queue is empty\n");
+	else if(front == rear)
+	{
+		front = rear = NULL;
+		free(start);
+	}
+	else
+	{
+		front = front->next;
+		rear->next = front;
+		free(start);//removing the first item
+	}
+}
+void printlist()// print the elements of queue
+{ 
+	struct node* start;
+	start= front;
+	if((front==NULL)&&(rear==NULL))
+		printf("queue is empty\n");
+	else{
+		do{
+			printf("%d",start->data);//printlist the list using do while loop
+			start = start->next;
+		}while(start!= front);
+		printf("\n");
+	}
+}
+int main()
+{
+    enqueue(7);
+    enqueue(2);
+    enqueue(3);
+    enqueue(5);
+    enqueue(8);
+    enqueue(1);
+    printlist();
+    dequeue();
+    dequeue();
+    printf("values after deleting\n");
+    printlist();
+}
