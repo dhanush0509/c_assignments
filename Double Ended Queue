@@ -1,0 +1,128 @@
+#include<stdio.h>
+int f = -1, r = -1;  
+int deque[5]; 
+void insert_front(int x)//insert the value at the front   
+{    
+    if((f==-1) && (r==-1))
+    {    
+        f=r=0;    
+        deque[f]=x;    
+    }    
+    else if(f==0)    
+    {    
+        f=4;    
+        deque[f]=x;    
+    }    
+    else    
+    {    
+        f=f-1;    
+        deque[f]=x;//inserting the value at starting 
+    }    
+}
+void insert_rear(int x)    //insert the value at the rear
+{   
+    if((f==-1) && (r==-1))    
+    {    
+        r=0;    
+        deque[r]=x;    
+    }    
+    else if(r==5)    
+    {    
+        r=0;    
+        deque[r]=x;    
+    }    
+    else    
+    {    
+        r++;    
+        deque[r]=x;    //inserting the value at last
+    }    
+}
+void display()    // display the values 
+{    
+    int i=f;    
+    printf("elements in a deque are:\n");    
+    while(i!=r)    
+    {    
+        printf("%d ",deque[i]);    
+        i=(i+1)%6;    
+    }    
+     printf("%d",deque[r]);    
+} 
+void getfront()    // this prints the first value which is at front 
+{    
+    if((f==-1) && (r==-1))    
+    {    
+        printf("deque is empty");    
+    }    
+    else    
+    {    
+        printf(" value of the element at front is: %d \n", deque[f]);    
+    }    
+}  
+void getrear()    // this prints the last value which is at last
+{    
+    if((f==-1) && (r==-1))    
+    {    
+        printf("deque is empty");    
+    }    
+    else    
+    {    
+        printf("value of the element at rear is %d\n", deque[r]);    
+    }    
+}  
+void delete_front()    // this deletes the first element 
+{    
+    if((f==-1) && (r==-1))    
+    {    
+        printf("deque is empty");    
+    }    
+    else if(f==r)    
+    {    
+        printf("deleted element is %d\n", deque[f]);    
+        f=-1;    
+        r=-1;    
+    }  
+    else    
+     {    
+          printf("deleted element is %d\n", deque[f]);    
+          f=f+1;    //the present value increses as present first value will be deleted 
+     }       
+}
+void delete_rear()    // this deletes the last element 
+{    
+    if((f==-1) && (r==-1))    
+    {    
+        printf("deque is empty");    
+    }    
+    else if(f==r)    
+    {    
+        printf("deleted element is %d\n", deque[r]);    
+        f=-1;    
+        r=-1;    
+    }    
+    else    
+    {    
+        printf(" deleted element is %d\n", deque[r]);    
+        r=r-1;    //the present value decreses as present last value will be deleted 
+    }  
+}
+int main()    
+{    
+    insert_front(2);    
+    insert_rear(3);    
+    insert_rear(1);    
+    insert_rear(7); 
+    insert_rear(4);
+    display();
+    printf("\n");
+    getfront();  
+    getrear();
+    delete_front();    
+    delete_rear(); 
+    display();
+    printf("\n");
+    insert_front(6);    // again inserting the values at front 
+    insert_rear(8);   // again inserting the values at last 
+    display();
+    return 0;
+}
