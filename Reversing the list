@@ -1,0 +1,69 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct list
+{ 
+  int data;
+  struct list* next;
+}node;
+node  *head,*tail;// creating a head and tail of a list //
+
+void insert( int n)  //inserting a node // 
+{ 
+  node *start;
+  start=(node*)malloc(sizeof(node));
+  start->data=n;
+  start->next=NULL;
+  if(head==NULL)// if the list is empty //
+  { 
+    head=start;
+    tail=start;
+  }
+  else// if the list is not empty it adds a node after another node, like that it creates a list //
+  { 
+    tail->next=start;
+    tail = start;
+  }
+}
+void print_list()// it prints the list//
+{ 
+  node *start;
+  start = head;
+  while(start!=NULL)
+  { 
+    printf(" %d ",start->data);
+    start=start->next;
+  }
+  printf("\n");
+}
+void reverselist()
+{
+    node *prev, *pres;
+    if(head != NULL)
+    {
+        prev = head;
+        pres = head->next;
+        head = head->next;
+        prev->next = NULL; // make first node as last node
+        while(head != NULL)
+        {
+            head = head->next;
+            pres->next = prev;
+            prev = pres;
+            pres = head;
+        }
+        head = prev; // make last node as head
+    }
+}
+int main()
+{
+  insert(2);
+  insert(3);
+  insert(1);
+  insert(4);
+  insert(6);
+  insert(9);
+  printf(" printing the original list \n ");
+  print_list();
+  reverselist();
+  printf(" printing the list after reversing the list \n ");
+}
