@@ -1,0 +1,50 @@
+#include<stdio.h>
+int max_crossing_subarray(int arr[], int low, int mid, int high) //maximum sum of subarray crossing the middle element
+{
+  int left_sum = -100000000; //left sum should be -infinity
+  int sum = 0;
+  int i;
+  
+  for (i=mid; i>=low; i--) //find the maximum sum of the left subarray
+  {
+    sum = sum+arr[i];
+    if (sum>left_sum)
+      left_sum = sum;
+  }
+  int right_sum = -100000000; //right sum should be -infinity
+  sum = 0;
+  for (i=mid+1; i<=high; i++) //finding the maximum sum of right subarray
+  {
+    sum=sum+arr[i];
+    if (sum>right_sum)
+      right_sum = sum;
+  }
+  return (left_sum+right_sum); //returns the maximum sum of the subarray containing the middle element
+}
+int maximum(int a, int b, int c) //returns maximum number from  three numbers i.e max sum
+{
+  if (a>=b && a>=c)
+    return a;
+  else if (b>=a && b>=c)
+    return b;
+  return c;
+}
+int max_sum_subarray(int arr[], int low, int high)// function to calculate the maximum subarray sum
+{
+  if (high == low) // only one element in an array
+  {
+    return arr[high];
+  }
+  int mid = (high+low)/2;// middle element of the array
+  int maximum_sum_left_subarray = max_sum_subarray(arr, low, mid); // max sum in the left subarray
+  int maximum_sum_right_subarray = max_sum_subarray(arr, mid+1, high);  // max sum in the right subarray
+  int maximum_sum_crossing_subarray = max_crossing_subarray(arr, low, mid, high); // max sum in the array containing the middle element
+  return maximum(maximum_sum_left_subarray, maximum_sum_right_subarray, maximum_sum_crossing_subarray);// returning the max from the three numbers
+}
+int main()
+{
+  int a[] = {13,-3,-25,20,-3,-16,-23,18,20,-7,12,-5,-22,15,-4,7};
+  printf("the maximun sum of subarray is  : ");
+  printf("%d\n", max_sum_subarray(a, 0, 15));
+  return 0;
+}
