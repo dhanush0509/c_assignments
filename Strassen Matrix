@@ -1,0 +1,63 @@
+#include<stdio.h>
+void matrix_data( int a[2][2],int b[2][2],int c[2][2])//entering the data for matrix
+{
+    int i,j;
+    printf("Enter the 4 elements of first matrix: ");//entering values for 1st matrix
+	for(i=0;i<2;i++)
+		for(j=0;j<2;j++)
+			scanf("%d",&a[i][j]);
+
+	printf("Enter the 4 elements of second matrix: ");//entering values for 2nd matrix
+	for(i=0;i<2;i++)
+		for(j=0;j<2;j++)
+			scanf("%d",&b[i][j]);
+
+	printf("first matrix is\n");//printing the 1st matris
+	for(i=0;i<2;i++)
+	{
+	    printf("\n");
+		for(j=0;j<2;j++)
+			printf("%d\t",a[i][j]);
+	}
+    printf("\n");
+	printf(" second matrix is \n");//printing the second matrix
+	for(i=0;i<2;i++)
+	{
+	    printf("\n");
+		for(j=0;j<2;j++)
+			printf("%d\t",b[i][j]);
+	}
+	printf("\n");
+}
+void matrix_multiply(int a[2][2],int b[2][2],int c[2][2])//multiplying the matrix using strassen matrix
+{
+    int p1,p2,p3,p4,p5,p6,p7;
+    int i,j;
+    p1= (a[0][0]+a[1][1])*(b[0][0]+b[1][1]);// adding and multiplying using strassens formulas
+	p2= (a[1][0]+a[1][1])*b[0][0];
+	p3= a[0][0]*(b[0][1]-b[1][1]);
+	p4= a[1][1]*(b[1][0]-b[0][0]);
+	p5= (a[0][0]+a[0][1])*b[1][1];
+	p6= (a[1][0]-a[0][0])*(b[0][0]+b[0][1]);
+	p7= (a[0][1]-a[1][1])*(b[1][0]+b[1][1]);
+
+	c[0][0]=p1+p4-p5+p7;//this is for multiplication using strassen formula
+	c[0][1]=p3+p5;
+	c[1][0]=p2+p4;
+	c[1][1]=p1-p2+p3+p6;
+
+	printf("after multiplication  \n");//printing the matrix after multiplication
+	for(i=0;i<2;i++)
+	{
+	    printf("\n");
+		for(j=0;j<2;j++)
+		printf("%d\t",c[i][j]);
+	}
+}
+int main()
+{
+	int a[2][2],b[2][2],c[2][2];
+	matrix_data(a,b,c);
+	matrix_multiply(a,b,c);
+    return 0;
+}
