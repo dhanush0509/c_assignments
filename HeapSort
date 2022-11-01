@@ -1,0 +1,94 @@
+#include<stdio.h>
+int insert(int*,int,int);
+void heapsort(int*,int);
+void print_array(int*,int);
+void heapify(int*,int, int);
+int del(int*,int);
+
+int insert(int* arr,int n,int a)
+{
+   n=n+1;//increasing the size of heap by 1
+   arr[n-1] = a;//inserting the element at end of heap
+   heapify(arr, n, n - 1);//heapifying the new node
+   return n;//return new size of heap
+}
+void heapsort(int* arr, int n)
+{
+    int i,temp;
+    for (i=n/2-1;i>=0;i--) // building  max heap
+    {
+        heapify(arr, n, i);
+    }
+    for (i=n-1;i>=0;i--) // sorting the max heap
+    {
+        temp = arr[i];// swap the root node and the last leaf node
+        arr[i] = arr[0];
+        arr[0] = temp;
+        heapify(arr, i, 0);  //heapify the max heap from the root 
+    }
+}
+void heapify(int* arr, int n, int i)
+{
+    int largest = i; //largest as the root element
+    int left = 2*i;
+    int right =2*i+1;
+    if (left<n&&arr[left]>arr[largest])//checking whether left child is larger than the root
+    {
+        largest=left;
+    }
+    if (right<n&&arr[right]>arr[largest])//checking whether right child is larger than the root
+    {
+        largest=right;
+    }
+    if (largest != i)// swap and heapify it the root is nor large
+    {
+        int temp = arr[i];
+        arr[i] = arr[largest];
+        arr[largest] = temp;
+        heapify(arr, n, largest);
+    }
+}
+int del(int* arr,int n)
+{
+    int last = arr[n-1];// the last element
+    arr[0] = last;// replacing root with first element
+    n=n-1;// decrease size of heap by 1
+    heapify(arr, n, 0);// heapify the root node
+    return n;//return new size of heap
+}
+void print_array(int* arr, int n)//printing the array
+{
+    for (int i=0;i<n;i++)
+    {
+        printf("%d ",arr[i]);
+    }
+}
+int main()
+{
+    int arr[] = { 27,17,3,16,13,10,1,5,7,12,4,8,9};
+    int n = 13;
+    printf("array before sorting:\n");
+    print_array(arr, n);
+    heapsort(arr, n);
+    printf("\n array after sorting:\n");
+    print_array(arr, n);
+    printf("\n");
+    int a;
+    printf(" enter a number to insert\n");
+    scanf("%d",&a);
+    n=insert(arr,n,a);
+    printf("new elements after insertion\n");
+    print_array(arr, n);
+    printf("\nsorting the elements after insertion\n");
+    heapsort(arr, n);
+    printf("array after sorting\n");
+    print_array(arr, n);
+    n=del(arr,n);
+    printf("\ndeleting the root node\n");
+    print_array(arr, n);
+    printf("\nsorting the array after deletion\n");
+    heapsort(arr,n);
+    printf("array after sorting\n");
+    print_array(arr, n);
+    return 0;
+}
