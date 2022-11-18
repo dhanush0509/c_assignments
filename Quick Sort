@@ -1,0 +1,63 @@
+#include<stdio.h>
+void quicksort(int[], int, int);
+int  partition(int[], int, int);
+void swap(int*, int*);
+void quicksort(int arr[],int first_index,int last_index)
+{
+    if(first_index < last_index)
+    {
+        int start = partition(arr,first_index,last_index);//start is is partitioning index
+        quicksort(arr, first_index, start-1);// recursive call on the left of pivot
+        quicksort(arr, start+1, last_index); // recursive call on the right of pivot
+    }
+}
+int partition(int arr[],int first_index,int last_index)// function to find the partition position
+{
+    int start = first_index;
+    int pivot = arr[last_index];//takes last element as pivot element
+    int i;
+    for(i = first_index; i < last_index; i++)// comparing the elements with the pivot
+    {
+        if(arr[i] < pivot)//it places smaller than pivot to left of pivot 
+        {
+            swap(&arr[i], &arr[start]);//greater elements to right of pivot
+
+            start++;
+        }
+    }
+    swap(&arr[last_index], &arr[start]);// swaping the pivot element with the greater element at i
+    return start;
+}
+void swap(int *x, int *y)//swapping elements
+{
+    int t = *x;
+    *x = *y;
+    *y = t;
+}
+void print_array(int arr[],int n)//function to print the array
+{
+    int i,j;
+     for(i=0;i<n;i++)
+     {
+        printf("%d ",arr[i]);
+     }
+    printf("\n");
+}
+int main()
+{
+    int arr[10];
+    int n,i;
+    printf("enter the  array size\n");
+    scanf("%d",&n);
+    printf("enter the elements of the  array \n");
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&arr[i]);
+    }
+    printf("printing the elements of the array\n");
+    print_array(arr,n);
+    quicksort(arr,0,n-1);
+    printf("printing elements after sorting\n");
+    print_array(arr,n);
+    return 0;
+}
