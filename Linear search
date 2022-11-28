@@ -1,0 +1,30 @@
+#include<stdio.h> 
+int linear_search(int arr[],int size,int val) 
+{ 
+    int i;
+	for (i=0;i<size;i++)//this one searches from the first index to last one by one using for loop
+	{	
+	    if (arr[i]==val)//if it is in the first index means it returns it first and saves time
+			return i;
+	}
+	return -1; 
+} 
+int main() 
+{ 
+    int arr[10],n,search,i,result;
+    printf("enter number of elements\n");
+    scanf("%d", &n);
+    printf("enter the elements of %d\n", n);
+    for (i=0;i<n;i++)
+    {
+    scanf("%d", &arr[i]);
+    }
+    printf("enter value to find\n");
+    scanf("%d",&search);
+    result = linear_search(arr,n,search); 
+	if (result == -1)
+	printf("element is not found in the array");
+    else
+    printf("element is in the array at index %d", result);
+	return 0; 
+}
